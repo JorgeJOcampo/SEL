@@ -281,6 +281,7 @@ public class MatrizMath {
 	
 	
 	public MatrizMath inversa(){
+		return null;
 		
 	}
 	
