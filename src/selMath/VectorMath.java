@@ -113,14 +113,14 @@ public class VectorMath {
 	}
 	
 	public VectorMath productoPorMatriz(MatrizMath matriz){
-		if (vector.length != matriz.getF())
+		if (vector.length != matriz.getFila())
 			throw new DisDimException("Diferentes dimensiones");
 
 		VectorMath resultado = new VectorMath(vector.clone());
-		double[] producto = new double[matriz.getC()];
-		for (int i = 0; i < matriz.getC(); i++) {
+		double[] producto = new double[matriz.getColumna()];
+		for (int i = 0; i < matriz.getColumna(); i++) {
 			producto[i] = 0;
-			for (int j = 0; j < matriz.getF(); j++) {
+			for (int j = 0; j < matriz.getFila(); j++) {
 				producto[i] += vector[j] * matriz.getMatriz()[i][j];
 			}
 		}
