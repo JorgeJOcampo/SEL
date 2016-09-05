@@ -33,9 +33,9 @@ public class MatrizMathTest {
 	}
 	
 	private void llenarMatriz(MatrizMath matriz) {
-		double matrizPrueba[][] = new double[matriz.getC()][matriz.getF()];
-		for(int i = 0 ; i < matriz.getC() ; i++){
-			for(int j = 0 ; j < matriz.getF() ; j++){
+		double matrizPrueba[][] = new double[matriz.getColumna()][matriz.getFila()];
+		for(int i = 0 ; i < matriz.getColumna() ; i++){
+			for(int j = 0 ; j < matriz.getFila() ; j++){
 				matrizPrueba[i][j]=2;
 			}
 		}
@@ -43,9 +43,9 @@ public class MatrizMathTest {
 	}
 	
 	private void llenarMatriz2(MatrizMath matriz) {
-		double matrizPrueba[][] = new double[matriz.getC()][matriz.getF()];
-		for(int i = 0 ; i < matriz.getC() ; i++){
-			for(int j = 0 ; j < matriz.getF() ; j++){
+		double matrizPrueba[][] = new double[matriz.getColumna()][matriz.getFila()];
+		for(int i = 0 ; i < matriz.getColumna() ; i++){
+			for(int j = 0 ; j < matriz.getFila() ; j++){
 				matrizPrueba[i][j]=j;
 			}
 		}
