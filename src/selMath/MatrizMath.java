@@ -273,7 +273,8 @@ public class MatrizMath {
 	public MatrizMath inversa(){
 		
 		MatrizMath identidad = crearIdentidad();
-		MatrizMath inversa = setUnoEnDiagonal(identidad);
+		MatrizMath inversa = this.clone();
+        inversa.setUnoEnDiagonal(identidad);
 		
 		inversa.triangular(identidad);
 		
@@ -281,16 +282,14 @@ public class MatrizMath {
 	}
 
 
-	public MatrizMath setUnoEnDiagonal(MatrizMath identidad){
-		MatrizMath resultado = this.clone();
-		for(int i=0;i<resultado.fila;i++){
-			double diagonal = 1 / resultado.matriz[i][i];
-			for(int j=0;j<resultado.columna;j++){
-				resultado.matriz[i][j] *= diagonal;
+	public void setUnoEnDiagonal(MatrizMath identidad){
+		for(int i=0;i<this.fila;i++){
+			double diagonal = 1 / this.matriz[i][i];
+			for(int j=0;j<this.columna;j++){
+				this.matriz[i][j] *= diagonal;
 				identidad.matriz[i][j] *= diagonal;
 			}
 		}
-		return resultado;
 	}
 	
 	public void triangular(MatrizMath identidad){
@@ -300,11 +299,16 @@ public class MatrizMath {
 
 	public void triangularSuperior(MatrizMath identidad){ //la parte de abajo
 		for(int k=0;k<this.fila-1;k++){
-			for(int i=1;i<this.fila;i++){
+            double valorcin = this.matriz[k][k];
+            for(int w = 0 ; w < this.columna ;w++){
+                this.matriz[k][w] /= valorcin;
+                identidad.matriz[k][w] /= valorcin;
+            }
+            for(int i=k+1;i<this.fila;i++){
 				double valor = this.matriz[i][k];
 				for(int j=0;j<this.columna;j++){
 					this.matriz[i][j] -= (this.matriz[k][j] * valor);
-					identidad.matriz[i][j] -= (this.matriz[k][j] * valor);
+					identidad.matriz[i][j] -= (identidad.matriz[k][j] * valor);
 				}
 			}
 		}
@@ -312,11 +316,16 @@ public class MatrizMath {
 
 	public void triangularInferior(MatrizMath identidad){ //la parte de arriba
 		for(int k=this.fila-1;k>0;k--){
-			for(int i=this.fila-1;i>0;i--){
+            double valorcin = this.matriz[k][k];
+            for(int w = 0 ; w < this.columna ;w++){
+                this.matriz[k][w] /= valorcin;
+                identidad.matriz[k][w] /= valorcin;
+            }
+            for(int i=k-1;i>=0;i--){
 				double valor = this.matriz[i][k];
 				for(int j=this.columna-1;j>=0;j--){
 					this.matriz[i][j] -= (this.matriz[k][j] * valor);
-					identidad.matriz[i][j] -= (this.matriz[k][j] * valor);
+					identidad.matriz[i][j] -= (identidad.matriz[k][j] * valor);
 				}
 			}
 		}
