@@ -22,6 +22,10 @@ public class VectorMath {
 		vector = v.clone();
 	}
 	
+	public VectorMath(int cantidadDeEcuaciones) {
+		vector = new double[cantidadDeEcuaciones];
+	}
+
 	@Override
 	public String toString() {
 		return "VectorMath [vector=" + Arrays.toString(vector) + "]";
