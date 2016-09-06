@@ -299,11 +299,7 @@ public class MatrizMath {
 
 	public void triangularSuperior(MatrizMath identidad){ //la parte de abajo
 		for(int k=0;k<this.fila-1;k++){
-            double valorcin = this.matriz[k][k];
-            for(int w = 0 ; w < this.columna ;w++){
-                this.matriz[k][w] /= valorcin;
-                identidad.matriz[k][w] /= valorcin;
-            }
+            setUnoEnLaFila(identidad, k);
             for(int i=k+1;i<this.fila;i++){
 				double valor = this.matriz[i][k];
 				for(int j=0;j<this.columna;j++){
@@ -314,13 +310,17 @@ public class MatrizMath {
 		}
 	}
 
-	public void triangularInferior(MatrizMath identidad){ //la parte de arriba
+    private void setUnoEnLaFila(MatrizMath identidad, int k) {
+        double valorcin = this.matriz[k][k];
+        for(int w = 0 ; w < this.columna ;w++){
+            this.matriz[k][w] /= valorcin;
+            identidad.matriz[k][w] /= valorcin;
+        }
+    }
+
+    public void triangularInferior(MatrizMath identidad){ //la parte de arriba
 		for(int k=this.fila-1;k>0;k--){
-            double valorcin = this.matriz[k][k];
-            for(int w = 0 ; w < this.columna ;w++){
-                this.matriz[k][w] /= valorcin;
-                identidad.matriz[k][w] /= valorcin;
-            }
+            setUnoEnLaFila(identidad, k);
             for(int i=k-1;i>=0;i--){
 				double valor = this.matriz[i][k];
 				for(int j=this.columna-1;j>=0;j--){
