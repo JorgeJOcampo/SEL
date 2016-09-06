@@ -255,16 +255,7 @@ public class MatrizMath {
 //		return resultado;
 //	}
 //
-//	public void crearIdentidad(){
-//		for(int i = 0; i< fila; i++){
-//			for(int j = 0; j< columna; j++){
-//				if(i==j)
-//					matriz[i][j] = 1;
-//				else
-//					matriz[i][j] = 0;
-//			}
-//		}
-//	}
+//
 
 	public static void main(String args[]){
 		MatrizMath matrizInicial = new MatrizMath(3, 3);
@@ -280,16 +271,69 @@ public class MatrizMath {
 	}
 
 	public MatrizMath inversa(){
-		return null;
 		
+		MatrizMath identidad = crearIdentidad();
+		MatrizMath inversa = setUnoEnDiagonal(identidad);
+		
+		inversa.triangular(identidad);
+		
+		return identidad;
 	}
 
 
+	public MatrizMath setUnoEnDiagonal(MatrizMath identidad){
+		MatrizMath resultado = this.clone();
+		for(int i=0;i<resultado.fila;i++){
+			double diagonal = 1 / resultado.matriz[i][i];
+			for(int j=0;j<resultado.columna;j++){
+				resultado.matriz[i][j] *= diagonal;
+				identidad.matriz[i][j] *= diagonal;
+			}
+		}
+		return resultado;
+	}
+	
+	public void triangular(MatrizMath identidad){
+		this.triangularSuperior(identidad);
+		this.triangularInferior(identidad);
+	}
 
+	public void triangularSuperior(MatrizMath identidad){ //la parte de abajo
+		for(int k=0;k<this.fila-1;k++){
+			for(int i=1;i<this.fila;i++){
+				double valor = this.matriz[i][k];
+				for(int j=0;j<this.columna;j++){
+					this.matriz[i][j] -= (this.matriz[k][j] * valor);
+					identidad.matriz[i][j] -= (this.matriz[k][j] * valor);
+				}
+			}
+		}
+	}
 
+	public void triangularInferior(MatrizMath identidad){ //la parte de arriba
+		for(int k=this.fila-1;k>0;k--){
+			for(int i=this.fila-1;i>0;i--){
+				double valor = this.matriz[i][k];
+				for(int j=this.columna-1;j>=0;j--){
+					this.matriz[i][j] -= (this.matriz[k][j] * valor);
+					identidad.matriz[i][j] -= (this.matriz[k][j] * valor);
+				}
+			}
+		}
+	}
 
-
-
+	public MatrizMath crearIdentidad(){
+		MatrizMath matriz = new MatrizMath(this.fila,this.columna);
+		for(int i = 0; i< fila; i++){
+			for(int j = 0; j< columna; j++){
+				if(i==j)
+					matriz.matriz[i][j] = 1;
+				else
+					matriz.matriz[i][j] = 0;
+			}
+		}
+		return matriz;
+	}
 
 
 
