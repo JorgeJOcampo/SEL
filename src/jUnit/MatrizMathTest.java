@@ -65,6 +65,9 @@ public class MatrizMathTest {
 		//double resultadoEsperado[][] = {{-16/1429,295/25722,932/12861},{9/1429,17/4287,-532/4287},{62/1429,-125/12861,1390/12861}};
 		double matriz[][] = {{1,2,2},{2,2,2},{2,2,1}};
 		double resultadoEsperado[][] = {{-1,1,0},{1,-1.5,1},{0,1,-1}};
+        //FIXME Corregir cuando hay un CERO en la Diagonal.
+//        double matriz[][] = {{1,2,2},{2,0,2},{2,2,1}};
+//		double resultadoEsperado[][] = {{-0.5, 0.25, 0.5},{0.25, -0.375, 0.25},{0.5, 0.25, -0.5}};
 		matrizInicial.setMatriz(matriz);
 		matrizResultado.setMatriz(resultadoEsperado);
 		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
