@@ -14,7 +14,8 @@ public class MatrizMath {
 		fila = sc.nextInt();
 		columna = sc.nextInt();
 		matriz = new double[fila][columna];
-		while (sc.hasNext()) {
+  //		while (sc.hasNext()) {
+		for(int i=0; i<fila*columna;i++){
 			matriz[sc.nextInt()][sc.nextInt()] = sc.nextDouble();
 		}
 		sc.close();
@@ -218,30 +219,25 @@ public class MatrizMath {
 		return suma;
 	}
 
-	public static void main(String args[]){
-		MatrizMath matrizInicial = new MatrizMath(3, 3);
-		MatrizMath matrizResultado = new MatrizMath(3, 3);
-		//double matriz[][] = {{10,25,22},{78,56,12},{3,-5,3/2}};
-		//double resultadoEsperado[][] = {{-16/1429,295/25722,932/12861},{9/1429,17/4287,-532/4287},{62/1429,-125/12861,1390/12861}};
-		double matriz[][] = {{1,2,2},{2,2,2},{2,2,1}};
-		double resultadoEsperado[][] = {{-1,1,0},{1,-3/2,1},{0,1,-1}};
-		matrizInicial.setMatriz(matriz);
-		matrizResultado.setMatriz(resultadoEsperado);
-		matrizInicial = matrizInicial.inversa();
-		matrizInicial.MostrarMatriz();
-	}
 
-	public MatrizMath inversa(){
+	public MatrizMath inversa() throws Exception{
 		
 		MatrizMath identidad = crearIdentidad();
 		MatrizMath inversa = this.clone();
         inversa.setUnoEnDiagonal(identidad);
-		
+	
 		inversa.triangular(identidad);
 		
+		
+		if(!inversa.comprobarMatrizInversa()) {
+			throw new Exception("error en el calculo de la matriz");
+			//FIXME crear exception para esto.
+		}
 		return identidad;
 	}
 
+
+	
 
 	public void setUnoEnDiagonal(MatrizMath identidad){
 		for(int i=0;i<this.fila;i++){
@@ -304,4 +300,15 @@ public class MatrizMath {
 		}
 		return matriz;
 	}
+	
+	private boolean comprobarMatrizInversa() {
+		MatrizMath identidad = crearIdentidad();
+		if(identidad.resta(this).normaDos()< Math.pow(Math.E,-6)){		
+			return true;
+		}
+		return false;
+	}
+	
+	
 }
+
