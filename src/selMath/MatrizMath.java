@@ -321,7 +321,15 @@ public class MatrizMath {
 		}
 		return false;
 	}
-	
-	
+
+    public VectorMath toVectorMath() {
+        VectorMath vectorMath = new VectorMath(this.matriz.length);
+        double[]vector = new double[this.matriz.length];
+        for(int i = 0 ; i < this.matriz.length ; i++){
+            vector[i] = this.matriz[i][0];
+        }
+        vectorMath.setVector(vector);
+        return vectorMath;
+    }
 }
 

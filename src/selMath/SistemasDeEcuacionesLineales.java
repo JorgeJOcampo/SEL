@@ -22,9 +22,9 @@ public class SistemasDeEcuacionesLineales {
 	
 	public SistemasDeEcuacionesLineales(String path) throws FileNotFoundException{
 		Scanner sc = new Scanner(new File(path));
-		matriz.setFila(sc.nextInt());
-		matriz.setColumna(sc.nextInt());
-		matriz = new MatrizMath(matriz.getFila(),matriz.getColumna());
+		int fila = sc.nextInt();
+		int columna = sc.nextInt();
+		matriz = new MatrizMath(fila, columna);
 		
 		double[][] matrizCargadora = new double[matriz.getFila()][matriz.getColumna()];
 
@@ -36,6 +36,7 @@ public class SistemasDeEcuacionesLineales {
 		 
 		 
 		 double[] vector = new double[sc.nextInt()];
+		resultado = new VectorMath(vector.length);
 			for(int i=0;i<vector.length;i++){
 				vector[i] = sc.nextDouble();
 			}
@@ -54,10 +55,13 @@ public class SistemasDeEcuacionesLineales {
 	}
 	
 	public VectorMath resolver() throws DisDimException{
-		if(!verificarIncognitasEcuaciones()){
-			throw new DisDimException("la cantidad de incognitas es mayor a la cantidad de ecuaciones. Indeterminado");
-		}
+//		if(!verificarIncognitasEcuaciones()){
+//			throw new DisDimException("la cantidad de incognitas es mayor a la cantidad de ecuaciones. Indeterminado");
+//		}
+		MatrizMath matrizResultado = resultado.toMatrizMath();
+		this.matriz.gaussJordan(matrizResultado);
+		this.mostrarResultado();
 
-		return resultado;
+		return matrizResultado.toVectorMath();
 	}
 }

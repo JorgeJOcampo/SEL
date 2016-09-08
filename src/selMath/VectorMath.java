@@ -3,7 +3,6 @@ package selMath;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class VectorMath {
@@ -132,4 +131,14 @@ public class VectorMath {
 		resultado.setVector(producto);
 		return resultado;
 	}
+
+    public MatrizMath toMatrizMath() {
+        MatrizMath matrizMath = new MatrizMath(this.vector.length,1);
+        double[][]matriz = new double[this.vector.length][1];
+        for(int i = 0 ; i < this.vector.length ; i++){
+            matriz[i][0] = this.vector[i];
+        }
+        matrizMath.setMatriz(matriz);
+        return matrizMath;
+    }
 }
