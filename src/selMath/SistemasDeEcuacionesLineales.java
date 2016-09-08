@@ -8,10 +8,10 @@ public class SistemasDeEcuacionesLineales {
 	private MatrizMath matriz;
 	private VectorMath resultado;
 	private VectorMath resultadoIncognitas;
-	private int cantidadDeIncognitas, cantidadDeEcuaciones;
+	private int cantidadDeEcuaciones;
 	
-	public SistemasDeEcuacionesLineales(int cantidadDeIncognitas, int cantidadDeEcuaciones){
-		matriz = new MatrizMath(cantidadDeEcuaciones, cantidadDeIncognitas);
+	public SistemasDeEcuacionesLineales( int cantidadDeEcuaciones){
+		matriz = new MatrizMath(cantidadDeEcuaciones, cantidadDeEcuaciones);
 		resultado = new VectorMath(cantidadDeEcuaciones);
 		
 	}
@@ -32,13 +32,7 @@ public class SistemasDeEcuacionesLineales {
 		this.resultado = resultado;
 	}
 
-	public int getCantidadDeIncognitas() {
-		return cantidadDeIncognitas;
-	}
-
-	public void setCantidadDeIncognitas(int cantidadDeIncognitas) {
-		this.cantidadDeIncognitas = cantidadDeIncognitas;
-	}
+	
 
 	public int getCantidadDeEcuaciones() {
 		return cantidadDeEcuaciones;
@@ -79,18 +73,15 @@ public class SistemasDeEcuacionesLineales {
 		 matriz.setMatriz(matrizCargadora);
 		 
 		 
-		 for(int i=0;i<vector.length;i++){
+		 double[] vector = new double[cantidadDeEcuaciones];
 		 resultado = new VectorMath(vector.length);
-		 double[] vector = new double[sc.nextInt()];
-			vector[i] = sc.nextDouble();
-		 resultado.setVector(vector);
+		 for(int i=0;i<vector.length;i++){
+		 vector[i] = sc.nextDouble();
 		 }
+		 resultado.setVector(vector);
 		 sc.close();
 	}
 	
-	public boolean verificarIncognitasEcuaciones(){
-		return cantidadDeIncognitas < cantidadDeEcuaciones;
-	}
 	
 	public void mostrarResultado(){
 		System.out.println(resultadoIncognitas);

@@ -259,8 +259,9 @@ public class MatrizMath {
 					matrizDerecha.matriz[i][j] -= (matrizDerecha.matriz[k][j] * valor);
 				}
 			}
-            if(this.verificarInversa()==false)
+            if(this.verificarInversa()==false){
     			throw new InversibleException("No se puede obtener Inversa");
+            }
 		}
 	}
 
