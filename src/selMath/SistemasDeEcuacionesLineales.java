@@ -64,11 +64,11 @@ public class SistemasDeEcuacionesLineales {
 	
 	public SistemasDeEcuacionesLineales(String path) throws FileNotFoundException{
 		Scanner sc = new Scanner(new File(path));
-		int fila = sc.nextInt();
-		int columna = sc.nextInt();
-		cantidadDeEcuaciones=fila;
-		cantidadDeIncognitas=columna;
-		matriz = new MatrizMath(fila, columna);
+		int longitud = sc.nextInt();
+
+		cantidadDeEcuaciones=longitud;
+		
+		matriz = new MatrizMath(longitud, longitud);
 		
 		double[][] matrizCargadora = new double[matriz.getFila()][matriz.getColumna()];
 
@@ -79,7 +79,7 @@ public class SistemasDeEcuacionesLineales {
 		 matriz.setMatriz(matrizCargadora);
 		 
 		 
-		 double[] vector = new double[sc.nextInt()];
+		 double[] vector = new double[longitud];
 		resultado = new VectorMath(vector.length);
 			for(int i=0;i<vector.length;i++){
 				vector[i] = sc.nextDouble();
