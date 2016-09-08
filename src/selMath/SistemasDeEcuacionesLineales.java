@@ -2,6 +2,9 @@ package selMath;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class SistemasDeEcuacionesLineales {
@@ -9,7 +12,16 @@ public class SistemasDeEcuacionesLineales {
 	private VectorMath resultado;
 	private VectorMath resultadoIncognitas;
 	private int cantidadDeEcuaciones;
+	private double error;
 	
+	public double getError() {
+		return error;
+	}
+
+	public void setError(double error) {
+		this.error = error;
+	}
+
 	public SistemasDeEcuacionesLineales( int cantidadDeEcuaciones){
 		matriz = new MatrizMath(cantidadDeEcuaciones, cantidadDeEcuaciones);
 		resultado = new VectorMath(cantidadDeEcuaciones);
@@ -82,6 +94,16 @@ public class SistemasDeEcuacionesLineales {
 		 sc.close();
 	}
 	
+	public void guardarResultadoEnArchivo(String path) throws IOException{
+		PrintWriter salida = new PrintWriter(new FileWriter(path));
+		salida.println(cantidadDeEcuaciones);
+		for(int i=0; i<cantidadDeEcuaciones;i++){
+			salida.println(resultadoIncognitas.getVector()[i]);
+		}
+		salida.println("");
+		salida.println(error);
+		salida.close();
+	}
 	
 	public void mostrarResultado(){
 		System.out.println(resultadoIncognitas);
