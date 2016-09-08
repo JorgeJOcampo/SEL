@@ -226,8 +226,8 @@ public class MatrizMath {
 		MatrizMath identidad = crearIdentidad();
 		MatrizMath inversa = this.clone();
 
-		inversa.triangular(identidad);
-
+		inversa.gaussJordan(identidad);
+//FIXME Notificar si la matriz no posee inversa
 //		if(!inversa.comprobarMatrizInversa()) {
 //			throw new Exception("error en el calculo de la matriz");
 //			//FIXME crear exception para esto.
@@ -236,78 +236,66 @@ public class MatrizMath {
 	}
 
 
-	
-
-	public void setUnoEnDiagonal(MatrizMath identidad){
-		for(int i=0;i<this.fila;i++){
-			double diagonal = 1 / this.matriz[i][i];
-			for(int j=0;j<this.columna;j++){
-				this.matriz[i][j] *= diagonal;
-				identidad.matriz[i][j] *= diagonal;
-			}
-		}
-	}
-	
-	public void triangular(MatrizMath identidad){
-		this.triangularSuperior(identidad);
-		this.triangularInferior(identidad);
+	public void gaussJordan(MatrizMath matrizDerecha){
+		this.triangularSuperior(matrizDerecha);
+		this.triangularInferior(matrizDerecha);
 	}
 
-	public void triangularSuperior(MatrizMath identidad){ //la parte de abajo
+	public void triangularSuperior(MatrizMath matrizDerecha){ //la parte de abajo
 		for(int k=0;k<this.fila-1;k++){
-			this.moverFilas(identidad, k);
-            setUnoEnLaFila(identidad, k);
+			this.moverFilas(matrizDerecha, k);
+            setUnoEnLaFila(matrizDerecha, k);
             for(int i=k+1;i<this.fila;i++){
 				double valor = this.matriz[i][k];
 				for(int j=0;j<this.columna;j++){
 					this.matriz[i][j] -= (this.matriz[k][j] * valor);
-					identidad.matriz[i][j] -= (identidad.matriz[k][j] * valor);
+					matrizDerecha.matriz[i][j] -= (matrizDerecha.matriz[k][j] * valor);
 				}
 			}
 		}
 	}
 
-    private void moverFilas(MatrizMath identidad, int pivote) {
+    private void moverFilas(MatrizMath matrizDerecha, int pivote) {
         int i = 1;
         while(this.matriz[pivote][pivote] == 0 && i < fila - pivote){
             if(this.matriz[pivote+i][pivote] == 0){
                 i++;
             } else{
-                intercambiarFilas(identidad, pivote, i);
+                intercambiarFilas(matrizDerecha, pivote, i);
             }
         }
     }
 
     //FIXME Refactorizar esto
-    private void intercambiarFilas(MatrizMath identidad, int pivote, int i) {
+    private void intercambiarFilas(MatrizMath matrizDerecha, int pivote, int i) {
         MatrizMath matrizAuxiliar = this.clone();
-        MatrizMath matrizIdentidadAuxiliar = identidad.clone();
+        MatrizMath matrizDerechaAuxiliar = matrizDerecha.clone();
         for(int j = 0 ; j < columna ; j++){
             matrizAuxiliar.matriz[pivote][j] = this.matriz[pivote+i][j];
             matrizAuxiliar.matriz[pivote+i][j] = this.matriz[pivote][j];
-            matrizIdentidadAuxiliar.matriz[pivote][j] = identidad.matriz[pivote+i][j];
-            matrizIdentidadAuxiliar.matriz[pivote+i][j] = identidad.matriz[pivote][j];
+            matrizDerechaAuxiliar.matriz[pivote][j] = matrizDerecha.matriz[pivote+i][j];
+            matrizDerechaAuxiliar.matriz[pivote+i][j] = matrizDerecha.matriz[pivote][j];
         }
         this.setMatriz(matrizAuxiliar.matriz);
-        identidad.setMatriz(matrizIdentidadAuxiliar.matriz);
+        matrizDerecha.setMatriz(matrizDerechaAuxiliar.matriz);
     }
 
-    private void setUnoEnLaFila(MatrizMath identidad, int k) {
+    private void setUnoEnLaFila(MatrizMath matrizDerecha, int k) {
         double valorcin = this.matriz[k][k];
         for(int w = 0 ; w < this.columna ;w++){
             this.matriz[k][w] /= valorcin;
-            identidad.matriz[k][w] /= valorcin;
+            matrizDerecha.matriz[k][w] /= valorcin;
         }
     }
 
-    public void triangularInferior(MatrizMath identidad){ //la parte de arriba
+    public void triangularInferior(MatrizMath matrizDerecha){ //la parte de arriba
 		for(int k=this.fila-1;k>0;k--){
-            setUnoEnLaFila(identidad, k);
+            setUnoEnLaFila(matrizDerecha, k);
             for(int i=k-1;i>=0;i--){
 				double valor = this.matriz[i][k];
 				for(int j=this.columna-1;j>=0;j--){
 					this.matriz[i][j] -= (this.matriz[k][j] * valor);
-					identidad.matriz[i][j] -= (identidad.matriz[k][j] * valor);
+					matrizDerecha.matriz[i][j] -= (matrizDerecha.matriz[k][j] * valor);
 				}
 			}
 		}

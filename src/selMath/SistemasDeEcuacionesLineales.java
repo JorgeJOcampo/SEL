@@ -2,6 +2,7 @@ package selMath;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class SistemasDeEcuacionesLineales {
@@ -56,8 +57,7 @@ public class SistemasDeEcuacionesLineales {
 		if(!verificarIncognitasEcuaciones()){
 			throw new DisDimException("la cantidad de incognitas es mayor a la cantidad de ecuaciones. Indeterminado");
 		}
+
 		return resultado;
-		
-		
 	}
 }
