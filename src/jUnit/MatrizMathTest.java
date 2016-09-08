@@ -65,9 +65,40 @@ public class MatrizMathTest {
 		//double resultadoEsperado[][] = {{-16/1429,295/25722,932/12861},{9/1429,17/4287,-532/4287},{62/1429,-125/12861,1390/12861}};
 		double matriz[][] = {{1,2,2},{2,2,2},{2,2,1}};
 		double resultadoEsperado[][] = {{-1,1,0},{1,-1.5,1},{0,1,-1}};
-        //FIXME Corregir cuando hay un CERO en la Diagonal.
-//        double matriz[][] = {{1,2,2},{2,0,2},{2,2,1}};
-//		double resultadoEsperado[][] = {{-0.5, 0.25, 0.5},{0.25, -0.375, 0.25},{0.5, 0.25, -0.5}};
+		matrizInicial.setMatriz(matriz);
+		matrizResultado.setMatriz(resultadoEsperado);
+		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
+	}
+
+	@Test
+	public void siHayUnCeroEnLaPrimeraPosicionDeLaDiagonalDebeIntercambiarFilasYCalculaCorrectamenteLaInversa()throws Exception{
+		MatrizMath matrizInicial = new MatrizMath(3, 3);
+		MatrizMath matrizResultado = new MatrizMath(3, 3);
+        double matriz[][] = {{0,2,2},{2,2,2},{2,2,1}};
+		double resultadoEsperado[][] = {{-0.5, 0.5, 0},{0.5, -1, 1},{0, 1, -1}};
+		matrizInicial.setMatriz(matriz);
+		matrizResultado.setMatriz(resultadoEsperado);
+		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
+	}
+
+	@Test
+	public void debeIntercambiarFilasParaAbajo()throws Exception{
+		MatrizMath matrizInicial = new MatrizMath(3, 3);
+		MatrizMath matrizResultado = new MatrizMath(3, 3);
+		double matriz[][] = {{2,2,2},{2,0,2},{2,0,1}};
+		double resultadoEsperado[][] = {{0, -0.5, 1},{0.5, -0.5, 0},{0, 1, -1}};
+		matrizInicial.setMatriz(matriz);
+		matrizResultado.setMatriz(resultadoEsperado);
+		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
+	}
+
+
+	@Test
+	public void debeIntercambiarFilasParaArriba()throws Exception{
+		MatrizMath matrizInicial = new MatrizMath(3, 3);
+		MatrizMath matrizResultado = new MatrizMath(3, 3);
+		double matriz[][] = {{0,0,1},{0,1,0},{1,0,0}};
+		double resultadoEsperado[][] = {{0,0,1},{0,1,0},{1,0,0}};
 		matrizInicial.setMatriz(matriz);
 		matrizResultado.setMatriz(resultadoEsperado);
 		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
@@ -75,10 +106,10 @@ public class MatrizMathTest {
 	
 	@Test
 	public void pruebaDeLaInversaConMatriz4x4() throws Exception{
-		MatrizMath matrizInicial = new MatrizMath(3, 3);
-		MatrizMath matrizResultado = new MatrizMath(3, 3);
-		double matriz[][] = {{1,2,2,3},{2,2,2,1},{2,2,1,6},{2,2,1,3}};
-		double resultadoEsperado[][] = {{-1,1,2/3,-2/3},{1,-3/2,-3/2,5/2},{0,1,2/3,-5/3},{0,0,1/3,-1/3}};
+		MatrizMath matrizInicial = new MatrizMath(4, 4);
+		MatrizMath matrizResultado = new MatrizMath(4, 4);
+		double matriz[][] = {{1,0,1,0},{1,0,1,1},{0,1,1,1},{1,1,1,1}};
+		double resultadoEsperado[][] = {{0,0, -1, 1},{0,-1,0,1},{1,0,1, -1},{-1,1,0,0}};
         matrizInicial.setMatriz(matriz);
 		matrizResultado.setMatriz(resultadoEsperado);
 		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
