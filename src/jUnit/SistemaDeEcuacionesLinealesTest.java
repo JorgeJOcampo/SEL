@@ -43,5 +43,14 @@ public class SistemaDeEcuacionesLinealesTest {
 		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
 	
 	}
-
+	
+	 /*  @Test
+	    public void doStuff() throws FileNotFoundException {
+	        SistemasDeEcuacionesLineales sistemasDeEcuacionesLineales = new SistemasDeEcuacionesLineales("D:/pablo.in");
+	        VectorMath resultadoEsperado = new VectorMath(3);
+	        double vectorResultado[] = {-0.5, -0.75, 0.75};
+	        resultadoEsperado.setVector(vectorResultado);
+	        Assert.assertEquals(resultadoEsperado, sistemasDeEcuacionesLineales.resolver());
+	    }
+*/
 }
