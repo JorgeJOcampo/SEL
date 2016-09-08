@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class VectorMath {
 	private double[] vector;
-	
+
+	@Deprecated
 	public VectorMath(String path) throws FileNotFoundException{
 		Scanner sc = new Scanner(new File(path));
 		vector = new double[sc.nextInt()];

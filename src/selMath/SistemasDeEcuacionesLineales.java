@@ -20,10 +20,6 @@ public class SistemasDeEcuacionesLineales {
 	}
 	
 	public SistemasDeEcuacionesLineales(String path) throws FileNotFoundException{
-	    matriz= new MatrizMath(path);
-		resultado=new VectorMath(path);
-		//FIXME buscar la forma de que esto ande asi para reutilizar codigo. abajo dejo la forma fea
-    /* 
 		Scanner sc = new Scanner(new File(path));
 		matriz.setFila(sc.nextInt());
 		matriz.setColumna(sc.nextInt());
@@ -44,7 +40,6 @@ public class SistemasDeEcuacionesLineales {
 			}
 			resultado.setVector(vector);
 		 sc.close();
-		*/
 	}
 	
 
