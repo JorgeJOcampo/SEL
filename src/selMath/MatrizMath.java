@@ -236,9 +236,13 @@ public class MatrizMath {
 	}
 
 
-	public void gaussJordan(MatrizMath matrizDerecha){
+	public void gaussJordan(MatrizMath matrizDerecha) throws Exception{
 		this.triangularSuperior(matrizDerecha);
 		this.triangularInferior(matrizDerecha);
+		
+		if(this.verificarInversa()==false)
+			throw new Exception("No se puede obtener Inversa");
+		
 	}
 
 	public void triangularSuperior(MatrizMath matrizDerecha){ //la parte de abajo
@@ -418,6 +422,51 @@ public class MatrizMath {
    }
 
     */
+   
+    public boolean verificarInversa(){
+
+    	for(int i=0;i<this.fila;i++){
+
+    		int j=0;
+
+    		while(j<this.columna&&this.matriz[i][j]==0){
+    			j++;
+    		}
+
+    		if(j==this.columna)
+    			return false;
+    	}
+
+    	for(int i=0;i<this.columna;i++){    	
+    		int k=0;
+    		while(k<this.fila&&this.matriz[k][i]==0){
+    			k++;
+    		}
+
+    		if(k==this.fila)
+    			return false;
+
+    	}
+
+    
+    	
+    	/*for(int i=0;i<this.columna;i++){                // No necesario, verifica que 2 columnas sean iguales
+    		for(int k=i+1;k<this.columna;k++){
+    			int j=0;
+    			while(this.matriz[j][i]==this.matriz[j][k] && j<this.fila){
+    				j++;
+    			}
+
+    			if(j==this.fila-1)
+    				return false;
+
+    		}
+
+
+    	}*/
+    	return true;
+    }
+
     
 }
-
+   
