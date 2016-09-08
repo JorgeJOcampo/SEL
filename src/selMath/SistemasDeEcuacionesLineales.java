@@ -110,8 +110,18 @@ public class SistemasDeEcuacionesLineales {
 	}
 	
 	public void resolver() throws InversibleException{
+		
 		resultadoIncognitas=matriz.inversa().productoPorVector(resultado);
+		
+		error=calcularError();
 
 		
 	}
+
+	private double calcularError() {
+
+		return resultado.resta(matriz.productoPorVector(resultadoIncognitas)).normaDos();
+	}
+	
+	
 }

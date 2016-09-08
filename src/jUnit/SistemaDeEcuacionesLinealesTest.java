@@ -20,6 +20,7 @@ public class SistemaDeEcuacionesLinealesTest {
 		VectorMath esperado=new VectorMath(3);
 		double[] resultado={0,0,1};
 		esperado.setVector(resultado);
+		
 		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
 	
 	}
@@ -37,9 +38,11 @@ public class SistemaDeEcuacionesLinealesTest {
 		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales(matrizInicial,vectorResultado);
 		
 		sel1.resolver();
+		
 		VectorMath esperado=new VectorMath(4);
 		double[] resultadoEsperado={1,0,0,0};
 		esperado.setVector(resultadoEsperado);
+		
 		
 		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
 	
