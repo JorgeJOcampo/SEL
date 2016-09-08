@@ -9,6 +9,7 @@ public class MatrizMath {
 	private double[][] matriz;
 	int fila, columna;
 
+	@Deprecated
 	public MatrizMath(String path) throws FileNotFoundException {
 		Scanner sc = new Scanner(new File(path));
 		fila = sc.nextInt();
@@ -224,15 +225,13 @@ public class MatrizMath {
 		
 		MatrizMath identidad = crearIdentidad();
 		MatrizMath inversa = this.clone();
-        inversa.setUnoEnDiagonal(identidad);
-	
+
 		inversa.triangular(identidad);
-		
-		
-		if(!inversa.comprobarMatrizInversa()) {
-			throw new Exception("error en el calculo de la matriz");
-			//FIXME crear exception para esto.
-		}
+
+//		if(!inversa.comprobarMatrizInversa()) {
+//			throw new Exception("error en el calculo de la matriz");
+//			//FIXME crear exception para esto.
+//		}
 		return identidad;
 	}
 
@@ -256,6 +255,7 @@ public class MatrizMath {
 
 	public void triangularSuperior(MatrizMath identidad){ //la parte de abajo
 		for(int k=0;k<this.fila-1;k++){
+			this.moverFilas(identidad, k);
             setUnoEnLaFila(identidad, k);
             for(int i=k+1;i<this.fila;i++){
 				double valor = this.matriz[i][k];
@@ -266,6 +266,31 @@ public class MatrizMath {
 			}
 		}
 	}
+
+    private void moverFilas(MatrizMath identidad, int pivote) {
+        int i = 1;
+        while(this.matriz[pivote][pivote] == 0 && i < fila - pivote){
+            if(this.matriz[pivote+i][pivote] == 0){
+                i++;
+            } else{
+                intercambiarFilas(identidad, pivote, i);
+            }
+        }
+    }
+
+    //FIXME Refactorizar esto
+    private void intercambiarFilas(MatrizMath identidad, int pivote, int i) {
+        MatrizMath matrizAuxiliar = this.clone();
+        MatrizMath matrizIdentidadAuxiliar = identidad.clone();
+        for(int j = 0 ; j < columna ; j++){
+            matrizAuxiliar.matriz[pivote][j] = this.matriz[pivote+i][j];
+            matrizAuxiliar.matriz[pivote+i][j] = this.matriz[pivote][j];
+            matrizIdentidadAuxiliar.matriz[pivote][j] = identidad.matriz[pivote+i][j];
+            matrizIdentidadAuxiliar.matriz[pivote+i][j] = identidad.matriz[pivote][j];
+        }
+        this.setMatriz(matrizAuxiliar.matriz);
+        identidad.setMatriz(matrizIdentidadAuxiliar.matriz);
+    }
 
     private void setUnoEnLaFila(MatrizMath identidad, int k) {
         double valorcin = this.matriz[k][k];
