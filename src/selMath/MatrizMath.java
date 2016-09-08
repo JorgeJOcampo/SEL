@@ -314,6 +314,7 @@ public class MatrizMath {
 		return matriz;
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean comprobarMatrizInversa() {
 		MatrizMath identidad = crearIdentidad();
 		if(identidad.resta(this).normaDos()< Math.pow(Math.E,-6)){		
@@ -334,7 +335,7 @@ public class MatrizMath {
     
     
     //Gauss jordan para resolver el SEL
-    
+ /*   
     public void gaussJordan(VectorMath vectorDerecho){
 		this.triangularSuperior(vectorDerecho);
 		this.triangularInferior(vectorDerecho);
@@ -416,7 +417,7 @@ public class MatrizMath {
 
    }
 
-    
+    */
     
 }
 

@@ -97,13 +97,15 @@ public class SistemasDeEcuacionesLineales {
 		System.out.println(resultadoIncognitas);
 	}
 	
-	public void resolver() throws DisDimException{
+	public void resolver() throws Exception{
 //		if(!verificarIncognitasEcuaciones()){
 //			throw new DisDimException("la cantidad de incognitas es mayor a la cantidad de ecuaciones. Indeterminado");
 //		}
 
-		resultadoIncognitas=resultado.clone();
-	    this.matriz.gaussJordan(resultadoIncognitas);
+		resultadoIncognitas=matriz.inversa().productoPorVector(resultado);
+	    //this.matriz.gaussJordan(resultadoIncognitas);
+		
+		
 
 		
 	}

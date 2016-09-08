@@ -1,7 +1,5 @@
 package jUnit;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -12,7 +10,7 @@ import selMath.VectorMath;
 @SuppressWarnings("deprecation")
 public class SistemaDeEcuacionesLinealesTest {
 	@Test
-	public void primerPruebaSEL() throws FileNotFoundException{
+	public void primerPruebaSEL() throws Exception{
 		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("D://prueba.in");
 		//la matriz es {{1,2,2},{2,2,2},{2,2,1}} y el resultado {2,2,1}
 		sel1.resolver();
@@ -24,7 +22,7 @@ public class SistemaDeEcuacionesLinealesTest {
 	}
 	
 	@Test
-	public void pruebaConUnSistema4x4() {
+	public void pruebaConUnSistema4x4() throws Exception {
 		//SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("D://prueba.in");
 		//la matriz es {{1,2,2},{2,2,2},{2,2,1}} y el resultado {2,2,1}
 		MatrizMath matrizInicial = new MatrizMath(4, 4);
