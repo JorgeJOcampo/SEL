@@ -221,31 +221,26 @@ public class MatrizMath {
 	}
 
 
-	public MatrizMath inversa() throws Exception{
+	public MatrizMath inversa() throws InversibleException{
 		
 		MatrizMath identidad = crearIdentidad();
 		MatrizMath inversa = this.clone();
 
 		inversa.gaussJordan(identidad);
-//FIXME Notificar si la matriz no posee inversa
-//		if(!inversa.comprobarMatrizInversa()) {
-//			throw new Exception("error en el calculo de la matriz");
-//			//FIXME crear exception para esto.
-//		}
+
 		return identidad;
 	}
 
 
-	public void gaussJordan(MatrizMath matrizDerecha) throws Exception{
+	public void gaussJordan(MatrizMath matrizDerecha) throws InversibleException{
 		this.triangularSuperior(matrizDerecha);
 		this.triangularInferior(matrizDerecha);
 		
-		if(this.verificarInversa()==false)
-			throw new Exception("No se puede obtener Inversa");
+		
 		
 	}
 
-	public void triangularSuperior(MatrizMath matrizDerecha){ //la parte de abajo
+	public void triangularSuperior(MatrizMath matrizDerecha) throws InversibleException{ //la parte de abajo
 		for(int k=0;k<this.fila-1;k++){
 			this.moverFilas(matrizDerecha, k);
             setUnoEnLaFila(matrizDerecha, k);
@@ -256,6 +251,8 @@ public class MatrizMath {
 					matrizDerecha.matriz[i][j] -= (matrizDerecha.matriz[k][j] * valor);
 				}
 			}
+            if(this.verificarInversa()==false)
+    			throw new InversibleException("No se puede obtener Inversa");
 		}
 	}
 
@@ -321,7 +318,7 @@ public class MatrizMath {
 	@SuppressWarnings("unused")
 	private boolean comprobarMatrizInversa() {
 		MatrizMath identidad = crearIdentidad();
-		if(identidad.resta(this).normaDos()< Math.pow(Math.E,-6)){		
+		if(identidad.resta(this).normaDos()< Math.pow(10,-6)){		
 			return true;
 		}
 		return false;
@@ -337,106 +334,18 @@ public class MatrizMath {
         return vectorMath;
     }
     
-    
-    //Gauss jordan para resolver el SEL
- /*   
-    public void gaussJordan(VectorMath vectorDerecho){
-		this.triangularSuperior(vectorDerecho);
-		this.triangularInferior(vectorDerecho);
-	}
-    
-    
-   private void triangularInferior(VectorMath resultadoIncognitas) {
-	   
-	   double[] resultado=resultadoIncognitas.getVector().clone();
-	   
-	   for(int k=this.fila-1;k>0;k--){
-           setUnoEnLaFila(resultado,k);
-           for(int i=k-1;i>=0;i--){
-				double valor = this.matriz[i][k];
-				for(int j=this.columna-1;j>=0;j--){
-					this.matriz[i][j] -= (this.matriz[k][j] * valor);
-				}
-				
-				resultado[i] -= (resultado[k] * valor);
-			}
-		}
-	   resultadoIncognitas.setVector(resultado);
-		
-	}
-
-   private void setUnoEnLaFila(double[] resultadoIncognitas, int k) {
-	  
-	   double valorcin = this.matriz[k][k];
-       for(int w = 0 ; w < this.columna ;w++){
-           this.matriz[k][w] /= valorcin;
-       }
-       resultadoIncognitas[k] /= valorcin;
-      
-	
-}
-
-   private void triangularSuperior(VectorMath resultadoIncognitas) {
-	   double[] resultado=resultadoIncognitas.getVector().clone();
-
-	   for(int k=0;k<this.fila-1;k++){
-		   this.moverFilas(resultado, k);
-		   setUnoEnLaFila(resultado,k);
-		   for(int i=k+1;i<this.fila;i++){
-			   double valor = this.matriz[i][k];
-			   for(int j=0;j<this.columna;j++){
-				   this.matriz[i][j] -= (this.matriz[k][j] * valor);
-			   }
-			   resultado[i] -= (resultado[k] * valor);
-		   }
-	   }
-	   resultadoIncognitas.setVector(resultado);
-
-   }
-
-   private void moverFilas(double[] resultadoIncognitas, int pivote) {
-	   int i = 1;
-	   while(this.matriz[pivote][pivote] == 0 && i < this.fila - pivote){
-		   if(this.matriz[pivote+i][pivote] == 0){
-			   i++;
-		   } else{
-			   intercambiarFilas(resultadoIncognitas,pivote, i);
-		   }
-	   }
-
-   }
-
-   private void intercambiarFilas(double[] resultadoIncognitas,int pivote, int i) {
-	   MatrizMath matrizAuxiliar = this.clone();
-	   double[] matrizDerechaAuxiliar = resultadoIncognitas.clone();
-	   for(int j = 0 ; j <  this.columna; j++){
-		   matrizAuxiliar.getMatriz()[pivote][j] = this.matriz[pivote+i][j];
-		   matrizAuxiliar.getMatriz()[pivote+i][j] = this.matriz[pivote][j];
-	   }
-	   matrizDerechaAuxiliar[pivote] = resultadoIncognitas[pivote+i];
-	   matrizDerechaAuxiliar[pivote+i] = resultadoIncognitas[pivote];
-
-	   this.setMatriz(matrizAuxiliar.matriz);
-	   resultadoIncognitas=matrizDerechaAuxiliar.clone();
-
-   }
-
-    */
+  
    
     public boolean verificarInversa(){
 
     	for(int i=0;i<this.fila;i++){
-
     		int j=0;
-
     		while(j<this.columna&&this.matriz[i][j]==0){
     			j++;
     		}
-
     		if(j==this.columna)
     			return false;
     	}
-
     	for(int i=0;i<this.columna;i++){    	
     		int k=0;
     		while(k<this.fila&&this.matriz[k][i]==0){
@@ -445,25 +354,9 @@ public class MatrizMath {
 
     		if(k==this.fila)
     			return false;
-
     	}
 
-    
-    	
-    	/*for(int i=0;i<this.columna;i++){                // No necesario, verifica que 2 columnas sean iguales
-    		for(int k=i+1;k<this.columna;k++){
-    			int j=0;
-    			while(this.matriz[j][i]==this.matriz[j][k] && j<this.fila){
-    				j++;
-    			}
-
-    			if(j==this.fila-1)
-    				return false;
-
-    		}
-
-
-    	}*/
+   
     	return true;
     }
 
