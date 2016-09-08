@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MatrizMath {
 	private double[][] matriz;
 	int fila, columna;
-
+/*
 	@Deprecated
 	public MatrizMath(String path) throws FileNotFoundException {
 		Scanner sc = new Scanner(new File(path));
@@ -16,6 +16,17 @@ public class MatrizMath {
 		columna = sc.nextInt();
 		matriz = new double[fila][columna];
   //		while (sc.hasNext()) {
+		for(int i=0; i<fila*columna;i++){
+			matriz[sc.nextInt()][sc.nextInt()] = sc.nextDouble();
+		}
+		sc.close();
+	}
+	*/
+	public MatrizMath(String path) throws FileNotFoundException {
+		Scanner sc = new Scanner(new File(path));
+		fila = sc.nextInt();
+		columna = fila;
+		matriz = new double[fila][columna];
 		for(int i=0; i<fila*columna;i++){
 			matriz[sc.nextInt()][sc.nextInt()] = sc.nextDouble();
 		}
@@ -235,9 +246,6 @@ public class MatrizMath {
 	public void gaussJordan(MatrizMath matrizDerecha) throws InversibleException{
 		this.triangularSuperior(matrizDerecha);
 		this.triangularInferior(matrizDerecha);
-		
-		
-		
 	}
 
 	public void triangularSuperior(MatrizMath matrizDerecha) throws InversibleException{ //la parte de abajo
@@ -351,12 +359,10 @@ public class MatrizMath {
     		while(k<this.fila&&this.matriz[k][i]==0){
     			k++;
     		}
-
     		if(k==this.fila)
     			return false;
     	}
 
-   
     	return true;
     }
 

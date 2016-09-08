@@ -79,15 +79,14 @@ public class SistemasDeEcuacionesLineales {
 		 matriz.setMatriz(matrizCargadora);
 		 
 		 
-		 double[] vector = new double[longitud];
-		resultado = new VectorMath(vector.length);
-			for(int i=0;i<vector.length;i++){
-				vector[i] = sc.nextDouble();
-			}
-			resultado.setVector(vector);
+		 for(int i=0;i<vector.length;i++){
+		 resultado = new VectorMath(vector.length);
+		 double[] vector = new double[sc.nextInt()];
+			vector[i] = sc.nextDouble();
+		 resultado.setVector(vector);
+		 }
 		 sc.close();
 	}
-	
 	
 	public boolean verificarIncognitasEcuaciones(){
 		return cantidadDeIncognitas < cantidadDeEcuaciones;
@@ -102,5 +101,4 @@ public class SistemasDeEcuacionesLineales {
 
 		
 	}
-
 }

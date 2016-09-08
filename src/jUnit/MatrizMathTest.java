@@ -1,5 +1,8 @@
 package jUnit;
 
+import java.io.File;
+import java.util.Scanner;
+
 import org.junit.Assert;
 
 import org.junit.Test;
@@ -112,5 +115,15 @@ public class MatrizMathTest {
         matrizInicial.setMatriz(matriz);
 		matrizResultado.setMatriz(resultadoEsperado);
 		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
+	}
+	
+	@Test
+	public void pruebaDeLaInversaConCasoDeFatiga() throws Exception{
+		String miPath = "E:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\10_casoFatiga.in";
+		MatrizMath matriz = new MatrizMath(miPath);
+		MatrizMath identidad = new MatrizMath(matriz.getFila(), matriz.getColumna()).crearIdentidad();
+		MatrizMath identidad2 = new MatrizMath(matriz.getFila(), matriz.getColumna()).crearIdentidad();
+		matriz.gaussJordan(identidad);
+		Assert.assertEquals(matriz.productoDeMatrices(identidad), identidad2);
 	}
 }
