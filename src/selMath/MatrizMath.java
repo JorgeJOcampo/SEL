@@ -331,5 +331,92 @@ public class MatrizMath {
         vectorMath.setVector(vector);
         return vectorMath;
     }
+    
+    
+    //Gauss jordan para resolver el SEL
+    
+    public void gaussJordan(VectorMath vectorDerecho){
+		this.triangularSuperior(vectorDerecho);
+		this.triangularInferior(vectorDerecho);
+	}
+    
+    
+   private void triangularInferior(VectorMath resultadoIncognitas) {
+	   
+	   double[] resultado=resultadoIncognitas.getVector().clone();
+	   
+	   for(int k=this.fila-1;k>0;k--){
+           setUnoEnLaFila(resultado,k);
+           for(int i=k-1;i>=0;i--){
+				double valor = this.matriz[i][k];
+				for(int j=this.columna-1;j>=0;j--){
+					this.matriz[i][j] -= (this.matriz[k][j] * valor);
+				}
+				
+				resultado[i] -= (resultado[k] * valor);
+			}
+		}
+	   resultadoIncognitas.setVector(resultado);
+		
+	}
+
+   private void setUnoEnLaFila(double[] resultadoIncognitas, int k) {
+	  
+	   double valorcin = this.matriz[k][k];
+       for(int w = 0 ; w < this.columna ;w++){
+           this.matriz[k][w] /= valorcin;
+       }
+       resultadoIncognitas[k] /= valorcin;
+      
+	
+}
+
+   private void triangularSuperior(VectorMath resultadoIncognitas) {
+	   double[] resultado=resultadoIncognitas.getVector().clone();
+
+	   for(int k=0;k<this.fila-1;k++){
+		   this.moverFilas(resultado, k);
+		   setUnoEnLaFila(resultado,k);
+		   for(int i=k+1;i<this.fila;i++){
+			   double valor = this.matriz[i][k];
+			   for(int j=0;j<this.columna;j++){
+				   this.matriz[i][j] -= (this.matriz[k][j] * valor);
+			   }
+			   resultado[i] -= (resultado[k] * valor);
+		   }
+	   }
+	   resultadoIncognitas.setVector(resultado);
+
+   }
+
+   private void moverFilas(double[] resultadoIncognitas, int pivote) {
+	   int i = 1;
+	   while(this.matriz[pivote][pivote] == 0 && i < this.fila - pivote){
+		   if(this.matriz[pivote+i][pivote] == 0){
+			   i++;
+		   } else{
+			   intercambiarFilas(resultadoIncognitas,pivote, i);
+		   }
+	   }
+
+   }
+
+   private void intercambiarFilas(double[] resultadoIncognitas,int pivote, int i) {
+	   MatrizMath matrizAuxiliar = this.clone();
+	   double[] matrizDerechaAuxiliar = resultadoIncognitas.clone();
+	   for(int j = 0 ; j <  this.columna; j++){
+		   matrizAuxiliar.getMatriz()[pivote][j] = this.matriz[pivote+i][j];
+		   matrizAuxiliar.getMatriz()[pivote+i][j] = this.matriz[pivote][j];
+	   }
+	   matrizDerechaAuxiliar[pivote] = resultadoIncognitas[pivote+i];
+	   matrizDerechaAuxiliar[pivote+i] = resultadoIncognitas[pivote];
+
+	   this.setMatriz(matrizAuxiliar.matriz);
+	   resultadoIncognitas=matrizDerechaAuxiliar.clone();
+
+   }
+
+    
+    
 }
 

@@ -2,28 +2,72 @@ package selMath;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Calendar;
 import java.util.Scanner;
 
 public class SistemasDeEcuacionesLineales {
 	private MatrizMath matriz;
 	private VectorMath resultado;
+	private VectorMath resultadoIncognitas;
 	private int cantidadDeIncognitas, cantidadDeEcuaciones;
 	
 	public SistemasDeEcuacionesLineales(int cantidadDeIncognitas, int cantidadDeEcuaciones){
 		matriz = new MatrizMath(cantidadDeEcuaciones, cantidadDeIncognitas);
 		resultado = new VectorMath(cantidadDeEcuaciones);
+		
 	}
 	
+	public MatrizMath getMatriz() {
+		return matriz;
+	}
+
+	public void setMatriz(MatrizMath matriz) {
+		this.matriz = matriz;
+	}
+
+	public VectorMath getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(VectorMath resultado) {
+		this.resultado = resultado;
+	}
+
+	public int getCantidadDeIncognitas() {
+		return cantidadDeIncognitas;
+	}
+
+	public void setCantidadDeIncognitas(int cantidadDeIncognitas) {
+		this.cantidadDeIncognitas = cantidadDeIncognitas;
+	}
+
+	public int getCantidadDeEcuaciones() {
+		return cantidadDeEcuaciones;
+	}
+
+	public void setCantidadDeEcuaciones(int cantidadDeEcuaciones) {
+		this.cantidadDeEcuaciones = cantidadDeEcuaciones;
+	}
+
+	public VectorMath getResultadoIncognitas() {
+		return resultadoIncognitas;
+	}
+
+	public void setResultadoIncognitas(VectorMath resultadoIncognitas) {
+		this.resultadoIncognitas = resultadoIncognitas;
+	}
+
 	public SistemasDeEcuacionesLineales(MatrizMath matriz, VectorMath resultado){
 		this.matriz = matriz.clone();
 		this.resultado = resultado.clone();
+		
 	}
 	
 	public SistemasDeEcuacionesLineales(String path) throws FileNotFoundException{
 		Scanner sc = new Scanner(new File(path));
 		int fila = sc.nextInt();
 		int columna = sc.nextInt();
+		cantidadDeEcuaciones=fila;
+		cantidadDeIncognitas=columna;
 		matriz = new MatrizMath(fila, columna);
 		
 		double[][] matrizCargadora = new double[matriz.getFila()][matriz.getColumna()];
@@ -44,24 +88,24 @@ public class SistemasDeEcuacionesLineales {
 		 sc.close();
 	}
 	
-
 	
 	public boolean verificarIncognitasEcuaciones(){
 		return cantidadDeIncognitas < cantidadDeEcuaciones;
 	}
 	
 	public void mostrarResultado(){
-		System.out.println(resultado);
+		System.out.println(resultadoIncognitas);
 	}
 	
-	public VectorMath resolver() throws DisDimException{
+	public void resolver() throws DisDimException{
 //		if(!verificarIncognitasEcuaciones()){
 //			throw new DisDimException("la cantidad de incognitas es mayor a la cantidad de ecuaciones. Indeterminado");
 //		}
-		MatrizMath matrizResultado = resultado.toMatrizMath();
-		this.matriz.gaussJordan(matrizResultado);
-		this.mostrarResultado();
 
-		return matrizResultado.toVectorMath();
+		resultadoIncognitas=resultado.clone();
+	    this.matriz.gaussJordan(resultadoIncognitas);
+
+		
 	}
+
 }
