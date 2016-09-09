@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SistemasDeEcuacionesLineales {
@@ -69,14 +70,14 @@ public class SistemasDeEcuacionesLineales {
 	}
 	
 	public SistemasDeEcuacionesLineales(String path) throws FileNotFoundException{
-		Scanner sc = new Scanner(new File(path));
-		int longitud = sc.nextInt();
+		Scanner sc = new Scanner(new File(path)).useLocale(Locale.US);
+		
 
-		cantidadDeEcuaciones=longitud;
+		cantidadDeEcuaciones= sc.nextInt();
 		
-		matriz = new MatrizMath(longitud, longitud);
+		matriz = new MatrizMath(cantidadDeEcuaciones, cantidadDeEcuaciones);
 		
-		double[][] matrizCargadora = new double[matriz.getFila()][matriz.getColumna()];
+		double[][] matrizCargadora = new double[cantidadDeEcuaciones][cantidadDeEcuaciones];
 
 		for(int i=0; i<matriz.getFila()*matriz.getColumna();i++){
 			matrizCargadora[sc.nextInt()][sc.nextInt()] = sc.nextDouble();
