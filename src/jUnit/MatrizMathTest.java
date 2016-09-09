@@ -60,8 +60,6 @@ public class MatrizMathTest {
 	public void pruebaInversa() throws Exception {
 		MatrizMath matrizInicial = new MatrizMath(3, 3);
 		MatrizMath matrizResultado = new MatrizMath(3, 3);
-		//double matriz[][] = {{10,25,22},{78,56,12},{3,-5,3/2}};
-		//double resultadoEsperado[][] = {{-16/1429,295/25722,932/12861},{9/1429,17/4287,-532/4287},{62/1429,-125/12861,1390/12861}};
 		double matriz[][] = {{1,2,2},{2,2,2},{2,2,1}};
 		double resultadoEsperado[][] = {{-1,1,0},{1,-1.5,1},{0,1,-1}};
 		matrizInicial.setMatriz(matriz);

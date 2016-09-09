@@ -8,20 +8,8 @@ import java.util.Scanner;
 public class MatrizMath {
 	private double[][] matriz;
 	int fila, columna;
-/*
+
 	@Deprecated
-	public MatrizMath(String path) throws FileNotFoundException {
-		Scanner sc = new Scanner(new File(path));
-		fila = sc.nextInt();
-		columna = sc.nextInt();
-		matriz = new double[fila][columna];
-  //		while (sc.hasNext()) {
-		for(int i=0; i<fila*columna;i++){
-			matriz[sc.nextInt()][sc.nextInt()] = sc.nextDouble();
-		}
-		sc.close();
-	}
-	*/
 	public MatrizMath(String path) throws FileNotFoundException {
 		Scanner sc = new Scanner(new File(path));
 		fila = sc.nextInt();
@@ -276,7 +264,6 @@ public class MatrizMath {
         }
     }
 
-    //FIXME Refactorizar esto
     private void intercambiarFilas(MatrizMath matrizDerecha, int pivote, int i) {
         MatrizMath matrizAuxiliar = this.clone();
         MatrizMath matrizDerechaAuxiliar = matrizDerecha.clone();

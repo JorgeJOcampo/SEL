@@ -1,6 +1,7 @@
 package jUnit;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -12,19 +13,7 @@ import selMath.VectorMath;
 
 @SuppressWarnings("deprecation")
 public class SistemaDeEcuacionesLinealesTest {
-	/*
-	@Test
-	public void primerPruebaSEL() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("D://prueba.in");
-		//la matriz es {{1,2,2},{2,2,2},{2,2,1}} y el resultado {2,2,1}
-		sel1.resolver();
-		VectorMath esperado=new VectorMath(3);
-		double[] resultado={0,0,1};
-		esperado.setVector(resultado);
-		
-		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
-	}
-	*/
+
 	@Test
 	public void pruebaConUnSistema4x4() throws InversibleException {
 		//SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("D://prueba.in");
@@ -116,9 +105,9 @@ public class SistemaDeEcuacionesLinealesTest {
 		Assert.assertTrue(exception);
 	}
 	
-	@Test //tira inputMismatchException (scanner al leer encontro un dato de un tipo que no deberia ser)
+	@Test
 	public void PruebaSEL1() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\01_caso2x2simple.in");
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\01_caso2x2simple.in");
 		//la matriz es {{1,1},{1.1,0.9}} y el resultado {-8.5,11.5}.
 		sel1.resolver();
 		System.out.println(sel1.getError());
@@ -130,7 +119,7 @@ public class SistemaDeEcuacionesLinealesTest {
 	
 	@Test
 	public void PruebaSEL2() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\02_caso01_levementePeturbado.in");
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\02_caso01_levementePeturbado.in");
 		//la matriz es {{1.01,1},{1,0.99}} y el resultado {-19700,19900}.
 		sel1.resolver();
 		System.out.println(sel1.getError());
@@ -142,7 +131,7 @@ public class SistemaDeEcuacionesLinealesTest {
 	
 	@Test
 	public void PruebaSEL3() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\03_4x4_Normal.in");
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\03_4x4_Normal.in");
 		sel1.resolver();
 		VectorMath esperado=new VectorMath(4);
 		double[] resultado={-7,3,2,2};
@@ -152,7 +141,7 @@ public class SistemaDeEcuacionesLinealesTest {
 	
 	@Test
 	public void PruebaSEL4() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\04_caso2x2cCasiLDsimple.in");
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\04_caso2x2cCasiLDsimple.in");
 		sel1.resolver();
 		System.out.println("caso 4: " + sel1.getError());
 		VectorMath esperado=new VectorMath(2);
@@ -162,86 +151,75 @@ public class SistemaDeEcuacionesLinealesTest {
 	}
 	
 	@Test
-	public void PruebaSEL5() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\05_caso1x1.in");
+	public void PruebaSEL5() throws InversibleException, IOException{
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\05_caso1x1.in");
 		//la matriz es {{1}} y el resultado {1}.
 		sel1.resolver();
 		VectorMath esperado=new VectorMath(1);
 		double[] resultado={1};
 		esperado.setVector(resultado);
 		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\05_caso1x1.out");
 	}
 	
 	@Test
-	public void PruebaSEL6() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\06_caso3x3_3_dependientes.in");
+	public void PruebaSEL6() throws InversibleException, IOException{
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\06_caso3x3_3_dependientes.in");
 		//la matriz es {{1,2,3},{2,4,6},{3,8,9}} y el resultado exception.
 		boolean exception=false;
 		try {
 			sel1.resolver();
 		} 
 		catch (InversibleException e) {
-		
 			exception=true;
 		}
 		Assert.assertTrue(exception);
 	}
 	
 	@Test
-	public void PruebaSEL7() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\07_caso3x3_fila_todos_ceros.in");
+	public void PruebaSEL7() throws InversibleException, IOException{
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\07_caso3x3_fila_todos_ceros.in");
 		//la matriz es {{1,2,3},{9,6,7},{0,0,0}} y el resultado exception.
-				boolean exception=false;
-				try {
-					sel1.resolver();
-				} 
-				catch (InversibleException e) {
-				
-					exception=true;
-				}
-				Assert.assertTrue(exception);
+		boolean exception=false;
+		try {
+			sel1.resolver();
+		}
+		catch (InversibleException e) {		
+			exception=true;
+		}
+		Assert.assertTrue(exception);
 	}
 	
 	@Test
-	public void PruebaSEL8() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\08_caso3x3_matrizIdentidad.in");
+	public void PruebaSEL8() throws InversibleException, IOException{
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\08_caso3x3_matrizIdentidad.in");
 		//la matriz es identidad y el resultado {1,1,1}.
 		sel1.resolver();
 		VectorMath esperado=new VectorMath(3);
 		double[] resultado={1,1,1};
 		esperado.setVector(resultado);
 		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\08_caso3x3_matrizIdentidad.out");
 	}
 	
 	@Test
-	public void PruebaSEL9() throws InversibleException, FileNotFoundException{
-		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\09_caso3x3_normal.in");
+	public void PruebaSEL9() throws InversibleException, IOException{
+		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\09_caso3x3_normal.in");
 		sel1.resolver();
 		VectorMath esperado=new VectorMath(3);
 		double[] resultado={-1,1.5,0};
 		esperado.setVector(resultado);
 		Assert.assertTrue(esperado.equals(sel1.getResultadoIncognitas()));
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\09_caso3x3_normal.out");
 	}
-	
-	 	
+
 	@Test
 	public void PruebaSEL10Fatiga() throws Exception{
-		String miPath = "C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\10_casoFatiga.in";
+		String miPath = "F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\10_casoFatiga.in";
 		SistemasDeEcuacionesLineales sel1= new SistemasDeEcuacionesLineales(miPath);
 		sel1.resolver();
 		System.out.println("caso fatiga: " + sel1.getError());
-		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));
-		
+		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\10_casoFatiga.out");
 	}
-	
-	/* 	
-   	@Test
-	    public void doStuff() throws FileNotFoundException {
-	        SistemasDeEcuacionesLineales sistemasDeEcuacionesLineales = new SistemasDeEcuacionesLineales("D:/pablo.in");
-	        VectorMath resultadoEsperado = new VectorMath(3);
-	        double vectorResultado[] = {-0.5, -0.75, 0.75};
-	        resultadoEsperado.setVector(vectorResultado);
-	        Assert.assertEquals(resultadoEsperado, sistemasDeEcuacionesLineales.resolver());
-	    }
-*/
 }
