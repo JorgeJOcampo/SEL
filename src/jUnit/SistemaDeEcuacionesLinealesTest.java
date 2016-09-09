@@ -140,7 +140,7 @@ public class SistemaDeEcuacionesLinealesTest {
 	}
 	
 	@Test
-	public void PruebaSEL4() throws InversibleException, FileNotFoundException{
+	public void PruebaSEL4() throws InversibleException, IOException{
 		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\04_caso2x2cCasiLDsimple.in");
 		sel1.resolver();
 		System.out.println("caso 4: " + sel1.getError());
@@ -148,6 +148,7 @@ public class SistemaDeEcuacionesLinealesTest {
 		double[] resultado={-1.8066862e-18,903348072e9};
 		esperado.setVector(resultado);
 		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\04_caso2x2cCasiLDsimple.out");
 	}
 	
 	@Test
@@ -225,20 +226,21 @@ public class SistemaDeEcuacionesLinealesTest {
 	
 	@Test
 	public void PruebaSEL11NumerosChicos() throws Exception{
-		String miPath = "C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/IN/11_ValoresChicos.in";
+		String miPath = "F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\11_ValoresChicos.in";
 		SistemasDeEcuacionesLineales sel1= new SistemasDeEcuacionesLineales(miPath);
 		sel1.resolver();
 		System.out.println("caso 11: " + sel1.getError());
 		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
-		sel1.guardarResultadoEnArchivo("C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/OUT/11_ValoresChicos.out");
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\11_ValoresChicos.out");
 	}
+	
 	@Test
 	public void PruebaSEL12NumerosGrandesResultadosChicos() throws Exception{
-		String miPath = "C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/IN/12_NumerosGrandesResultadoChico.in";
+		String miPath = "F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\12_NumerosGrandesResultadoChico.in";
 		SistemasDeEcuacionesLineales sel1= new SistemasDeEcuacionesLineales(miPath);
 		sel1.resolver();
 		System.out.println("caso 12: " + sel1.getError());
 		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
-		sel1.guardarResultadoEnArchivo("C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/OUT/12_NumerosGrandesResultadoChico.out");
+		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\12_NumerosGrandesResultadoChico.out");
 	}
 }
