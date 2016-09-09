@@ -93,7 +93,7 @@ public class SistemasDeEcuacionesLineales {
 		 resultado.setVector(vector);
 		 sc.close();
 	}
-	
+
 	public void guardarResultadoEnArchivo(String path) throws IOException{
 		PrintWriter salida = new PrintWriter(new FileWriter(path));
 		salida.println(cantidadDeEcuaciones);

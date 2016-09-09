@@ -113,14 +113,4 @@ public class MatrizMathTest {
 		matrizResultado.setMatriz(resultadoEsperado);
 		Assert.assertTrue(matrizResultado.equals(matrizInicial.inversa()));
 	}
-	
-	@Test
-	public void pruebaDeLaInversaConCasoDeFatiga() throws Exception{
-		String miPath = "E:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\10_casoFatiga.in";
-		MatrizMath matriz = new MatrizMath(miPath);
-		MatrizMath identidad = new MatrizMath(matriz.getFila(), matriz.getColumna()).crearIdentidad();
-		
-		
-		Assert.assertEquals(identidad,matriz.inversa());
-	}
 }
