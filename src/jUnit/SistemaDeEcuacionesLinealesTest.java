@@ -154,6 +154,7 @@ public class SistemaDeEcuacionesLinealesTest {
 	public void PruebaSEL4() throws InversibleException, FileNotFoundException{
 		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\04_caso2x2cCasiLDsimple.in");
 		sel1.resolver();
+		System.out.println("caso 4: " + sel1.getError());
 		VectorMath esperado=new VectorMath(2);
 		double[] resultado={-1.8066862e-18,903348072e9};
 		esperado.setVector(resultado);
@@ -228,6 +229,7 @@ public class SistemaDeEcuacionesLinealesTest {
 		String miPath = "C:\\Users\\Pablo\\Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\10_casoFatiga.in";
 		SistemasDeEcuacionesLineales sel1= new SistemasDeEcuacionesLineales(miPath);
 		sel1.resolver();
+		System.out.println("caso fatiga: " + sel1.getError());
 		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));
 		
 	}

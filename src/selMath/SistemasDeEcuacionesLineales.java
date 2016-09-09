@@ -120,8 +120,8 @@ public class SistemasDeEcuacionesLineales {
 	}
 
 	private double calcularError() {
-
-		return resultado.resta(matriz.productoPorVector(resultadoIncognitas)).normaDos();
+	    VectorMath prod = (matriz.productoPorVector(resultadoIncognitas));
+		return (resultado.resta(prod)).normaDos();
 	}
 	
 	
