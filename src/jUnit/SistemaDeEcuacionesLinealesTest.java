@@ -104,7 +104,7 @@ public class SistemaDeEcuacionesLinealesTest {
 		}
 		Assert.assertTrue(exception);
 	}
-	
+
 	@Test
 	public void PruebaSEL1() throws InversibleException, FileNotFoundException{
 		SistemasDeEcuacionesLineales sel1=new SistemasDeEcuacionesLineales("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\IN\\01_caso2x2simple.in");
@@ -221,5 +221,15 @@ public class SistemaDeEcuacionesLinealesTest {
 		System.out.println("caso fatiga: " + sel1.getError());
 		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
 		sel1.guardarResultadoEnArchivo("F:\\UNLaM\\Programación Avanzada\\GitKraken - Workspace\\SEL\\Preparación de Prueba\\Lote de Prueba\\OUT\\10_casoFatiga.out");
+	}
+	
+	@Test
+	public void PruebaSEL11NumerosChicos() throws Exception{
+		String miPath = "C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/IN/11_ValoresChicos.in";
+		SistemasDeEcuacionesLineales sel1= new SistemasDeEcuacionesLineales(miPath);
+		sel1.resolver();
+		System.out.println("caso 11: " + sel1.getError());
+		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
+		sel1.guardarResultadoEnArchivo("C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/OUT/11_ValoresChicos.out");
 	}
 }
