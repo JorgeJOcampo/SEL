@@ -232,4 +232,13 @@ public class SistemaDeEcuacionesLinealesTest {
 		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
 		sel1.guardarResultadoEnArchivo("C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/OUT/11_ValoresChicos.out");
 	}
+	@Test
+	public void PruebaSEL12NumerosGrandesResultadosChicos() throws Exception{
+		String miPath = "C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/IN/12_NumerosGrandesResultadoChico.in";
+		SistemasDeEcuacionesLineales sel1= new SistemasDeEcuacionesLineales(miPath);
+		sel1.resolver();
+		System.out.println("caso 12: " + sel1.getError());
+		Assert.assertTrue(sel1.getError()<Math.pow(10, -6));	
+		sel1.guardarResultadoEnArchivo("C:/Users/Pablo/Workspace/SEL/Preparación de Prueba/Lote de Prueba/OUT/12_NumerosGrandesResultadoChico.out");
+	}
 }
